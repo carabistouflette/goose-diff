@@ -4,9 +4,6 @@ import diff.unified;
 import std;
 
 fn golden(a: const u8[:], b: const u8[:], expected: const u8[:]) {
-    golden("x", "x\n", "--- a/input\n+++ b/input\n@@ -1,1 +1,1 @@\n-x\n\\ No newline at end of file\n+x\n");
-    golden("x", "a\nx", "--- a/input\n+++ b/input\n@@ -1,1 +1,2 @@\n+a\n x\n\\ No newline at end of file\n");
-    golden("a\nx", "x", "--- a/input\n+++ b/input\n@@ -1,2 +1,1 @@\n-a\n x\n\\ No newline at end of file\n");
     var out: u8[>..] = [99];
     assert(patch::unified(a, b, out, diff::Limits { .. }, expected.len) == diff::Error.None);
     assert(out == expected);
@@ -16,6 +13,9 @@ fn golden(a: const u8[:], b: const u8[:], expected: const u8[:]) {
     }
 }
 fn main() {
+    golden("x", "x\n", "--- a/input\n+++ b/input\n@@ -1,1 +1,1 @@\n-x\n\\ No newline at end of file\n+x\n");
+    golden("x", "a\nx", "--- a/input\n+++ b/input\n@@ -1,1 +1,2 @@\n+a\n x\n\\ No newline at end of file\n");
+    golden("a\nx", "x", "--- a/input\n+++ b/input\n@@ -1,2 +1,1 @@\n-a\n x\n\\ No newline at end of file\n");
     golden("", "", "");
     golden("same\n", "same\n", "");
     golden("a\nb\nc\n", "a\nx\nc\n", "--- a/input\n+++ b/input\n@@ -1,3 +1,3 @@\n a\n-b\n+x\n c\n");
