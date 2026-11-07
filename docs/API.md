@@ -1,13 +1,14 @@
 # API and contracts
 
 Import the root as `diff`; `import diff.unified;` also provides namespace `patch`.
-Supported API: Error, Kind, Edit, Limits, diff::compare, patch::unified and hard
+Supported API: Error, Kind, Edit, Limits, diff::compare, patch::unified, patch::unified_context and hard
 limit constants. Other module-visible helpers assume validated internal arguments
 and are unsupported implementation details.
 
 ```goose
 fn compare(old: const u8[:], fresh: const u8[:], out: Edit[>..]&, limits: Limits) -> Error
 fn unified(old: const u8[:], fresh: const u8[:], out: u8[>..]&, limits: diff::Limits, output_limit: i64) -> diff::Error
+fn unified_context(old: const u8[:], fresh: const u8[:], out: u8[>..]&, limits: diff::Limits, output_limit: i64, context_lines: i64) -> diff::Error
 ```
 
 Error is None, InvalidOptions, or LimitExceeded. Every call clears output first;
@@ -74,5 +75,26 @@ unmodified, without claiming compatibility with every external patch tool.
 Rendering adds scans bounded by both input sizes and appends at most output_limit
 bytes. It accepts no caller-constructed edit script. Output storage must be
 distinct from input storage; Goose borrow rules enforce the supported pattern.
-Patch application, context selection, intra-line differences and Unicode
-segmentation are outside v1.
+Patch application, intra-line differences and Unicode segmentation are outside v1.
+
+### Context hunks
+
+`patch::unified_context` uses the same byte semantics, fixed labels, budgets,
+transactional output and comparison algorithm. `context_lines` accepts 0 through
+`diff::MAX_LINES` (16384); other values return InvalidOptions with empty output.
+Every change retains up to that many equal lines on either side. Overlapping or
+touching windows merge: an equal-line gap of at most twice context is included
+once, while larger gaps separate hunks. Context zero omits all unchanged lines.
+Each hunk header uses one-based starts for nonempty ranges; an empty range uses
+the zero-based preceding-line count, including interior insertions/deletions.
+The legacy `unified` still renders exactly one full-file hunk.
+
+Planning expands a validated edit script into bounded per-line rows plus one
+sentinel and bounded hunk descriptors. Additional logical storage is at most
+`24 * (old_lines + new_lines + 1) + 16 * (old_lines + new_lines)` bytes,
+excluding allocator growth/runtime overhead. Planning and rendering are linear
+in row count plus input bytes; monotonic byte cursors scan omitted lines once.
+Context does not reduce LCS matrix/comparison work or permit larger inputs.
+All rendered hunks share one output_limit; failures clear the entire output,
+including any earlier complete hunks. Inputs remain raw and require separate
+escaping before terminal display. Identical inputs produce no rows or output.
