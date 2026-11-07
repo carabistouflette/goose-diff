@@ -13,6 +13,7 @@ check:
 	"$(GOOSE)" check tests/unified.goose
 	"$(GOOSE)" check tests/context.goose
 	"$(GOOSE)" check examples/compare.goose
+	"$(GOOSE)" check examples/sparse.goose
 	"$(GOOSE)" check bench/bench.goose
 	"$(GOOSE)" check bench/context.goose
 	"$(GOOSE)" check tests/patch_cli.goose
@@ -22,6 +23,7 @@ test:
 	"$(GOOSE)" run tests/unified.goose
 	"$(GOOSE)" run tests/context.goose
 	"$(GOOSE)" run examples/compare.goose
+	"$(GOOSE)" run examples/sparse.goose
 test-debug:
 	"$(GOOSE)" run tests/core.goose --debug
 	"$(GOOSE)" run tests/sparse.goose --debug

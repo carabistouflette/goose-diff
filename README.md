@@ -16,6 +16,7 @@ git clone https://github.com/carabistouflette/goose-diff.git
 cd goose-diff
 make setup
 .toolchain/goose/build/goose run examples/compare.goose
+.toolchain/goose/build/goose run examples/sparse.goose
 make check test test-debug test-gcc test-clang test-patch sanitize
 ```
 
