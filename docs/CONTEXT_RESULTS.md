@@ -10,11 +10,11 @@ scanning, missing-final-newline handling and output rollback. Normal/debug tests
 GCC/Clang debug executables, ASan/UBSan and 5,325 no-fuzz GNU patch round trips pass.
 The pre-existing exponential minimality/reconstruction oracle is retained.
 
-[All75 raw samples and inputs](../bench/results/context-alpha2/) are retained.
+[All 75 raw samples and inputs](../bench/results/context-alpha2/) are retained.
 The pinned compiler produced actual diagnostic blocks; the harness aggregates
 independent compilation units with one changed unit. Other cases include generated
 text, scattered edits, dense rewrites and repeated long lines. Every call uses the
-consumer's fixed comparison budgets and raw16KiB cap, with rotating mode order.
+consumer's fixed comparison budgets and raw 16 KiB cap, with rotating mode order.
 
 For the diagnostic transcript and generated middle edit, comparison succeeds but
 full-file output exceeds the cap; context rendering succeeds. Scattered edits
