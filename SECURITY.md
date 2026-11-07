@@ -1,9 +1,10 @@
 # Security
 
-This local experimental project has no public vulnerability reporting endpoint
-yet. Report suspected vulnerabilities privately to the repository owner; do not
-include sensitive fixtures in public issues. Publication requires a configured
-private reporting channel and an updated policy with its exact destination.
+Report suspected vulnerabilities privately through
+[GitHub private vulnerability reporting](https://github.com/carabistouflette/goose-diff/security/advisories/new).
+Include affected source/compiler revisions, platform and a minimal reproducer.
+Do not include sensitive fixtures or vulnerability details in public issues.
+This experimental library has no production support or stability promise.
 
 The core accepts arbitrary bytes, including NUL, invalid UTF-8 and terminal
 control sequences. It performs no I/O. Input, token, matrix and byte-comparison

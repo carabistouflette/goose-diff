@@ -7,10 +7,12 @@ rendering produces bounded raw patch bytes.
 
 ## Quickstart
 
-From a standalone checkout, install Git, Make, CMake 3.27+, Python 3.11+ and a
+Install Git, Make, CMake 3.27+, Python 3.11+ and a
 C/C++20 toolchain, then:
 
 ```sh
+git clone https://github.com/carabistouflette/goose-diff.git
+cd goose-diff
 make setup
 .toolchain/goose/build/goose run examples/compare.goose
 make check test test-debug test-gcc test-clang test-patch sanitize
@@ -31,9 +33,10 @@ fn main() {
 }
 ```
 
-The import assumes a neighboring local checkout. No public URL or release is
-claimed yet. `goose-check` is the proposed first consumer; integration has not
-been performed. The library performs no filesystem, process or terminal I/O.
+The import assumes a neighboring local checkout. For a published version use
+`import diff from "carabistouflette/goose-diff@v0.1.0-alpha.1";` instead.
+`goose-check` adoption is validated separately with an immutable vendored source
+pin. The library performs no filesystem, process or terminal I/O.
 
 [API and limits](docs/API.md) · [validation](docs/VALIDATION.md) ·
 [benchmarks](bench/README.md) · [contributing](CONTRIBUTING.md) ·
