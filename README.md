@@ -3,7 +3,8 @@
 Bounded, byte-exact line comparison for Goose. Experimental, Apache-2.0, pure
 Goose with no runtime dependency beyond stdlib. Returns minimal insertion/deletion
 edits with deterministic ordering and explicit resource limits. Optional unified
-rendering produces bounded raw patch bytes.
+rendering produces bounded raw patch bytes. `patch::unified_context` selects
+context lines around changes; the original full-file renderer remains available.
 
 ## Quickstart
 
