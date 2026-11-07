@@ -11,7 +11,7 @@ import diff.unified;
 // patch::unified_sparse_context(old, fresh, out, sparse::Limits { .. }, output_limit, context_lines) -> diff::Error
 ```
 
-Only sparse::Limits, sparse::compare, its documented hard-bound constants and
+Only sparse::Limits, sparse::compare, MAX_BYTES/MAX_LINES/MAX_STATES/MAX_WORK and
 patch::unified_sparse_context are supported. Other helpers assume validated
 internal arguments. See README for the current version/import and API.md for
 common Edit ownership, opaque LF byte semantics and context rendering rules.
