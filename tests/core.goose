@@ -193,6 +193,10 @@ fn hard_boundaries() {
     verify(bytes, fresh);
 }
 fn main() {
+    var partial: diff::Edit[>..] = [];
+    assert(diff::compare("same\na\n", "same\nb\n", partial, diff::Limits { max_cells: 0, .. }) == diff::Error.LimitExceeded);
+    assert(partial.len == 0);
+
     exhaustive();
     for a in ["", "\n", "\n\n", "x", "x\n", "x\r\n", "\0\xff\n", "a\nb\na\n"] {
         for b in ["", "\n", "\n\n", "x", "x\n", "x\r\n", "\0\xff\n", "a\nb\na\n"] {
