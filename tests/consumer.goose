@@ -1,0 +1,53 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copied outside the repository by consumer.py.
+import diff from "..";
+import diff.sparse;
+import diff.unified;
+import std;
+fn main() {
+    assert(diff::MAX_BYTES == 1048576 && diff::MAX_LINES == 16384);
+    assert(diff::MAX_CELLS == 4194304 && diff::MAX_WORK == 67108864);
+    assert(sparse::MAX_BYTES == diff::MAX_BYTES && sparse::MAX_LINES == diff::MAX_LINES);
+    assert(sparse::MAX_STATES == 4194304 && sparse::MAX_WORK == diff::MAX_WORK);
+    assert(patch::MAX_OUTPUT_BYTES == 8388608);
+    let lcs = diff::Limits { .. };
+    let bounded = sparse::Limits { .. };
+    assert(lcs.max_bytes == 1048576 && lcs.max_lines == 16384);
+    assert(lcs.max_cells == 1048576 && lcs.max_work == 16777216);
+    assert(bounded.max_bytes == 1048576 && bounded.max_lines == 16384);
+    assert(bounded.max_states == 1048576 && bounded.max_work == 16777216);
+    var edits: diff::Edit[>..] = [];
+    assert(diff::compare("a\nb\n", "b\na\n", edits, lcs) == diff::Error.None);
+    assert(edits.len == 3 && edits[0].kind == diff::Kind.Delete);
+    assert(edits[0].old_start == 0 && edits[0].old_end == 1);
+    assert(edits[0].new_start == 0 && edits[0].new_end == 0);
+    assert(edits[1].kind == diff::Kind.Equal && edits[2].kind == diff::Kind.Insert);
+    assert(sparse::compare("a\nb\n", "b\na\n", edits, bounded) == diff::Error.None);
+    assert(edits.len == 3 && edits[0].kind == diff::Kind.Insert);
+    assert(edits[1].kind == diff::Kind.Equal && edits[2].kind == diff::Kind.Delete);
+    assert(diff::compare("x", "y", edits, diff::Limits { max_work: 0, .. }) == diff::Error.LimitExceeded);
+    assert(edits.len == 0);
+    assert(sparse::compare("", "", edits, sparse::Limits { max_states: -1, .. }) == diff::Error.InvalidOptions);
+    assert(edits.len == 0);
+    let old = "\0\xFF\r\n";
+    let fresh = "\x1B";
+    let headers = "--- a/input\n+++ b/input\n@@ -1,1 +1,1 @@\n";
+    let marker = "\n\\ No newline at end of file\n";
+    var expected: u8[>..] = [];
+    expected.append(headers); expected.append("-\0\xFF\r\n+\x1B"); expected.append(marker);
+    var out: u8[>..] = [99];
+    assert(patch::unified(old, fresh, out, lcs, expected.len) == diff::Error.None);
+    assert(out == expected);
+    assert(patch::unified_context(old, fresh, out, lcs, expected.len, 0) == diff::Error.None);
+    assert(out == expected);
+    expected.clear();
+    expected.append(headers); expected.append("+\x1B"); expected.append(marker); expected.append("-\0\xFF\r\n");
+    assert(patch::unified_sparse_context(old, fresh, out, bounded, expected.len, 0) == diff::Error.None);
+    assert(out == expected);
+    assert(patch::unified_sparse_context(old, fresh, out, bounded, expected.len - 1, 0) == diff::Error.LimitExceeded);
+    assert(out.len == 0);
+    out.push(99);
+    assert(patch::unified_context(old, fresh, out, lcs, 1000, -1) == diff::Error.InvalidOptions);
+    assert(out.len == 0);
+    print("external consumer: all supported entry points and byte/error contracts passed");
+}
