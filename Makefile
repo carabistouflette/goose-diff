@@ -13,6 +13,7 @@ check:
 	"$(GOOSE)" check tests/context.goose
 	"$(GOOSE)" check examples/compare.goose
 	"$(GOOSE)" check bench/bench.goose
+	"$(GOOSE)" check bench/context.goose
 	"$(GOOSE)" check tests/patch_cli.goose
 test:
 	"$(GOOSE)" run tests/core.goose
@@ -49,3 +50,8 @@ test-patch:
 	mkdir -p .build
 	"$(GOOSE)" build tests/patch_cli.goose --cc gcc --debug -o .build/patch-cli
 	python3 tests/patch_roundtrip.py .build/patch-cli
+
+.PHONY: bench-context-build
+bench-context-build:
+	mkdir -p .build
+	"$(GOOSE)" build bench/context.goose --cc gcc -O2 -o .build/context-bench
