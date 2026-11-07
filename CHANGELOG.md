@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.0
+
+- Freeze the documented supported API and behavior for compatible v0.1.x patches.
+- Check every supported entry point from a fresh external consumer directory.
+- Preserve alpha.3 implementation bytes, LCS defaults and explicit sparse selection.
+- Clarify pre-1.0 scope, runtime failure policy and platform qualification.
+
 ## v0.1.0-alpha.3
 
 - Add explicit sparse comparison with a separate trace-state Limits type.

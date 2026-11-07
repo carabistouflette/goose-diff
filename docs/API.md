@@ -1,9 +1,22 @@
 # API and contracts
 
-Import the root as `diff`; `import diff.unified;` also provides namespace `patch`.
-Supported API: Error, Kind, Edit, Limits, diff::compare, patch::unified, patch::unified_context and hard
-limit constants. Other module-visible helpers assume validated internal arguments
-and are unsupported implementation details.
+Import the root as `diff`; `import diff.sparse;` provides namespace `sparse` and
+`import diff.unified;` provides namespace `patch`.
+
+The supported v0.1.x API is exactly:
+
+| Namespace | Supported symbols |
+| --- | --- |
+| `diff` | `Error`, `Kind`, `Edit`, `Limits`, `compare`, `MAX_BYTES`, `MAX_LINES`, `MAX_CELLS`, `MAX_WORK` |
+| `sparse` | `Limits`, `compare`, `MAX_BYTES`, `MAX_LINES`, `MAX_STATES`, `MAX_WORK` |
+| `patch` | `unified`, `unified_context`, `unified_sparse_context`, `MAX_OUTPUT_BYTES` |
+
+This includes the documented enum variants, struct fields, defaults, hard maxima,
+error meanings, budget units, deterministic per-strategy ordering and byte/output
+semantics. Other module-visible helpers and types assume validated internal
+arguments and are unsupported implementation details. See the
+[v0.1.x compatibility policy](RELEASE.md). Sparse signatures and limits are in
+[SPARSE.md](SPARSE.md); LCS signatures follow.
 
 ```goose
 fn compare(old: const u8[:], fresh: const u8[:], out: Edit[>..]&, limits: Limits) -> Error

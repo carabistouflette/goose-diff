@@ -4,7 +4,9 @@ Report suspected vulnerabilities privately through
 [GitHub private vulnerability reporting](https://github.com/carabistouflette/goose-diff/security/advisories/new).
 Include affected source/compiler revisions, platform and a minimal reproducer.
 Do not include sensitive fixtures or vulnerability details in public issues.
-This experimental library has no production support or stability promise.
+The supported v0.1.x API follows the [compatibility policy](docs/RELEASE.md).
+This pre-1.0 project provides no support SLA or platform guarantees beyond its
+documented qualification. Report issues against the latest v0.1.x patch release.
 
 The core accepts arbitrary bytes, including NUL, invalid UTF-8 and terminal
 control sequences. It performs no I/O. Input, token, matrix/trace and byte-comparison
