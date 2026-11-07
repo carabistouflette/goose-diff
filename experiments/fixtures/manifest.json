@@ -1,0 +1,102 @@
+{
+  "consumer": "goose-check --diff at alpha.2 adoption",
+  "consumer_binary_sha256": "15a132dc1768838793a0e4ae5c77f37fa407fc36c3dc3e8a3081b04f812f4fa7",
+  "consumer_source": "9524439d57a8d75457dd8c98ea56ff823aac2e05",
+  "bounds": {
+    "max_bytes": 65536,
+    "max_lines": 4096,
+    "max_cells": 262144,
+    "max_work": 1048576,
+    "max_states": 262144
+  },
+  "cases": [
+    {
+      "name": "generated_two_far",
+      "old_bytes": 25200,
+      "new_bytes": 25200,
+      "old_lines": 1200,
+      "new_lines": 1200,
+      "old_sha256": "c666e250d63c9bcd42904c1a9260f3466a05b80e29db542db72c76758801ed49",
+      "new_sha256": "a322e2831b0cdc71cfda8e625f5cfacf75e6694bce02e16336da5c5fe4a5a9bc",
+      "expected_min_edits": 4,
+      "baseline_omitted": true
+    },
+    {
+      "name": "generated_three_far",
+      "old_bytes": 25200,
+      "new_bytes": 25200,
+      "old_lines": 1200,
+      "new_lines": 1200,
+      "old_sha256": "c666e250d63c9bcd42904c1a9260f3466a05b80e29db542db72c76758801ed49",
+      "new_sha256": "640edecc8e1021f8f500b4d7f5bd1d596fc2b60aa7664dfcfd110643cebaccc5",
+      "expected_min_edits": 6,
+      "baseline_omitted": true
+    },
+    {
+      "name": "compiler_two_far",
+      "old_bytes": 39290,
+      "new_bytes": 39290,
+      "old_lines": 800,
+      "new_lines": 800,
+      "old_sha256": "a1c111237e68302673d871992ad243b2c3b6b310cceb85703e42b816b720ebc4",
+      "new_sha256": "0133ea326aed3322adca65beb7585fcb2dce880d3d8554a02f9b7a2d1ef45e52",
+      "expected_min_edits": 8,
+      "baseline_omitted": true
+    },
+    {
+      "name": "repeated_two_far",
+      "old_bytes": 2400,
+      "new_bytes": 2400,
+      "old_lines": 1200,
+      "new_lines": 1200,
+      "old_sha256": "d8346334ca2a80d78a4f6408de2ffee2ca8f9200e6e4f35480f40c883ac8219c",
+      "new_sha256": "788e84dd1d7889f6b1131eac79c07f54893ba567799d917ba543797d7e8b1e91",
+      "expected_min_edits": 4,
+      "baseline_omitted": true
+    },
+    {
+      "name": "equal",
+      "old_bytes": 25200,
+      "new_bytes": 25200,
+      "old_lines": 1200,
+      "new_lines": 1200,
+      "old_sha256": "c666e250d63c9bcd42904c1a9260f3466a05b80e29db542db72c76758801ed49",
+      "new_sha256": "c666e250d63c9bcd42904c1a9260f3466a05b80e29db542db72c76758801ed49",
+      "expected_min_edits": 0,
+      "baseline_omitted": false
+    },
+    {
+      "name": "single_middle",
+      "old_bytes": 25200,
+      "new_bytes": 25200,
+      "old_lines": 1200,
+      "new_lines": 1200,
+      "old_sha256": "c666e250d63c9bcd42904c1a9260f3466a05b80e29db542db72c76758801ed49",
+      "new_sha256": "f086fe1073408b59653d75be1c26169446a3439b53ba0b61c062d5f734cc102a",
+      "expected_min_edits": 2,
+      "baseline_omitted": false
+    },
+    {
+      "name": "dense_rewrite",
+      "old_bytes": 1200,
+      "new_bytes": 1200,
+      "old_lines": 600,
+      "new_lines": 600,
+      "old_sha256": "cf952a70c3c625a8987ee4217c1781391b95215953d4aceede4bf94cc5e199ff",
+      "new_sha256": "8e53e61f131fb2c20056a79628e2a8825a7912ca594abe7aedc863c45f397c70",
+      "expected_min_edits": 1200,
+      "baseline_omitted": true
+    },
+    {
+      "name": "dense_different_lengths",
+      "old_bytes": 1400,
+      "new_bytes": 2100,
+      "old_lines": 700,
+      "new_lines": 700,
+      "old_sha256": "70436131d538d6203fa793a7cf0575a884399b911be84ad2f452ed5e0a9fcc20",
+      "new_sha256": "0c2913d1e122b9777c306d6497cda8146fc08415c5eb9187c4218c7b64f8b435",
+      "expected_min_edits": 1400,
+      "baseline_omitted": true
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+goose-check: stdout mismatch at byte 12612; expected length 25200, actual length 25200
+goose-check: escaped stdout diff (expected -> actual)
+--- a/input
++++ b/input
+@@ -598,7 +598,7 @@
+ field_0597=unchanged
+ field_0598=unchanged
+ field_0599=unchanged
+-field_0600=unchanged
++field_0600=updated!!
+ field_0601=unchanged
+ field_0602=unchanged
+ field_0603=unchanged
