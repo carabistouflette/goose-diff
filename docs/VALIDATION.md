@@ -20,3 +20,5 @@ CI uses an immutable checkout action and read-only permissions. Hosted CI has
 not run until this standalone repository is published. Before release validate
 an exact-source standalone clone, obtain independent review, and document
 source/toolchain identities. No public release or consumer migration is implied.
+
+[Retained local results](RESULTS.md) record tested source and limitations.
