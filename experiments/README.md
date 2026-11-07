@@ -56,3 +56,27 @@ Backtracking does not compare bytes again. No recursion or approximate fallback.
 Farthest candidate-x predecessor wins; equal candidate x selects deletion.
 This frontier rule does not imply LCS's returned-script tie rule. Tests retain
 counterexamples instead of normalizing away an observable difference.
+
+## Reproduce
+
+Use the exact compiler in GOOSE_REVISION. The experiment branch wires its tests
+and qualification into the existing Make/CI matrix; main has no experiment API.
+
+```sh
+make check test test-debug test-gcc test-clang test-patch sanitize experiment-verify
+make experiment-build
+python3 experiments/benchmark.py --binary .build/myers-measure --goose /absolute/pinned/goose --out .build/myers-samples
+```
+
+Run with a clean source tree. Consumer profile matches current input/byte-work
+bounds and uses separately named equal logical-slot ceilings for each backend.
+Wide profile gives both backends 4,194,304 int64 slots and 67,108,864 compared-byte
+pairs to obtain successful controls. These are not interchangeable API counters.
+Modes alternate order. Failed calls stay labeled; compare successful calls only
+within the same profile/input. Timing excludes file reads and independent script
+verification. RSS includes runtime, preflight and repeated calls; it is not heap
+accounting or a single CLI invocation. Keep every raw sample and slower result.
+
+To reproduce CLI baselines, build goose-check at the full source in the fixture
+manifest and run experiments/fixtures.py --consumer /absolute/goose-check. This
+rewrites frozen fixtures and is deliberately outside timed measurements/CI.
