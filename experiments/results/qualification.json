@@ -1,0 +1,260 @@
+{
+  "cases": [
+    {
+      "workload": "generated_two_far",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "generated_two_far",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 4,
+      "patch_applied": true
+    },
+    {
+      "workload": "generated_two_far",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 4,
+      "patch_applied": true
+    },
+    {
+      "workload": "generated_two_far",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 4,
+      "patch_applied": true
+    },
+    {
+      "workload": "generated_three_far",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "generated_three_far",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 6,
+      "patch_applied": true
+    },
+    {
+      "workload": "generated_three_far",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 6,
+      "patch_applied": true
+    },
+    {
+      "workload": "generated_three_far",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 6,
+      "patch_applied": true
+    },
+    {
+      "workload": "compiler_two_far",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "compiler_two_far",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 8,
+      "patch_applied": true
+    },
+    {
+      "workload": "compiler_two_far",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 8,
+      "patch_applied": true
+    },
+    {
+      "workload": "compiler_two_far",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 8,
+      "patch_applied": true
+    },
+    {
+      "workload": "repeated_two_far",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "repeated_two_far",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 4,
+      "patch_applied": true
+    },
+    {
+      "workload": "repeated_two_far",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 4,
+      "patch_applied": true
+    },
+    {
+      "workload": "repeated_two_far",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 4,
+      "patch_applied": true
+    },
+    {
+      "workload": "equal",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 0,
+      "patch_applied": true
+    },
+    {
+      "workload": "equal",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 0,
+      "patch_applied": true
+    },
+    {
+      "workload": "equal",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 0,
+      "patch_applied": true
+    },
+    {
+      "workload": "equal",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 0,
+      "patch_applied": true
+    },
+    {
+      "workload": "single_middle",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 2,
+      "patch_applied": true
+    },
+    {
+      "workload": "single_middle",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 2,
+      "patch_applied": true
+    },
+    {
+      "workload": "single_middle",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 2,
+      "patch_applied": true
+    },
+    {
+      "workload": "single_middle",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 2,
+      "patch_applied": true
+    },
+    {
+      "workload": "dense_rewrite",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "dense_rewrite",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "dense_rewrite",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 1200,
+      "patch_applied": true
+    },
+    {
+      "workload": "dense_rewrite",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 1200,
+      "patch_applied": true
+    },
+    {
+      "workload": "dense_different_lengths",
+      "profile": "consumer",
+      "backend": "lcs",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "dense_different_lengths",
+      "profile": "consumer",
+      "backend": "myers",
+      "error": "Error.LimitExceeded",
+      "min_edits": -1,
+      "patch_applied": false
+    },
+    {
+      "workload": "dense_different_lengths",
+      "profile": "wide",
+      "backend": "lcs",
+      "error": "Error.None",
+      "min_edits": 1400,
+      "patch_applied": true
+    },
+    {
+      "workload": "dense_different_lengths",
+      "profile": "wide",
+      "backend": "myers",
+      "error": "Error.None",
+      "min_edits": 1400,
+      "patch_applied": true
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+goose-check: stdout mismatch at byte 0; expected length 1400, actual length 2100
+goose-check: stdout diff omitted (resource limit)
