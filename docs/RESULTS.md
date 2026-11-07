@@ -1,4 +1,7 @@
-# Local validation evidence
+# Historical alpha.1 local validation evidence
+
+These results describe alpha.1 only. See [current validation](VALIDATION.md) and
+the [release policy](RELEASE.md) for subsequent qualification.
 
 Implementation and harness source: `4a76b8d` (full identity in benchmark provenance).
 Core and renderer behavior are unchanged by the subsequent compiler-setup fix.

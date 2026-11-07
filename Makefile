@@ -17,6 +17,7 @@ check:
 	"$(GOOSE)" check bench/bench.goose
 	"$(GOOSE)" check bench/context.goose
 	"$(GOOSE)" check tests/patch_cli.goose
+	"$(GOOSE)" check tests/consumer.goose
 test:
 	"$(GOOSE)" run tests/core.goose
 	"$(GOOSE)" run tests/sparse.goose
@@ -64,3 +65,7 @@ test-patch:
 bench-context-build:
 	mkdir -p .build
 	"$(GOOSE)" build bench/context.goose --cc gcc -O2 -o .build/context-bench
+
+.PHONY: test-consumer
+test-consumer:
+	python3 tests/consumer.py "$(GOOSE)"

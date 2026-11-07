@@ -4,7 +4,7 @@ Use the clean compiler source revision recorded in GOOSE_REVISION.
 
 ```sh
 make setup
-make check test test-debug test-gcc test-clang test-patch sanitize bench
+make check test test-debug test-gcc test-clang test-patch test-consumer sanitize bench
 ```
 
 Core tests enumerate 961 short sequence pairs using an independent exponential
@@ -16,10 +16,11 @@ Unified tests check exact bytes and output boundaries. `test-patch` independentl
 applies generated small textual patches with GNU patch (install `patch`). GCC/Clang builds and
 ASan/UBSan exercise generated native code; checks do not prove every input safe.
 
-CI uses an immutable checkout action and read-only permissions. Hosted CI has
-not run until this standalone repository is published. Before release validate
-an exact-source standalone clone, obtain independent review, and document
-source/toolchain identities. No public release or consumer migration is implied.
+CI uses an immutable checkout action and read-only permissions. Alpha.3 was
+published with green exact-source hosted CI and validated goose-check adoption.
+For each subsequent release, validate an exact-source standalone clone, obtain
+independent review and green exact-source CI, and record source/toolchain
+identities. See the [release qualification procedure](RELEASE.md).
 
 [Retained local results](RESULTS.md) record tested source and limitations.
 
@@ -34,3 +35,10 @@ hostile rewrites. Sparse context shares the independent GNU patch oracle, now
 9,585 LCS/sparse cases. Existing LCS and context goldens remain unchanged. The
 retained experimental branch b6253d0 provides earlier performance evidence; its
 results are historical and not a universal speed or memory claim.
+
+The external consumer target copies a standalone program into a fresh temporary
+directory outside the checkout. It imports the root and both submodules, checks
+all supported entry points, constants/defaults, distinct LCS/sparse tie behavior,
+raw binary/final-LF rendering and empty output after errors. It runs normal/debug
+and GCC/Clang compiled checks. A separate published import check can select an
+immutable revision or tag with `--import-source`; see RELEASE.md.

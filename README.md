@@ -1,10 +1,14 @@
 # goose-diff
 
-Bounded, byte-exact line comparison for Goose. Experimental, Apache-2.0, pure
+Bounded, byte-exact line comparison for Goose. Apache-2.0, pure
 Goose with no runtime dependency beyond stdlib. Returns minimal insertion/deletion
 edits with deterministic ordering and explicit resource limits. LCS is the default;
 explicit `diff.sparse` supplies a separately bounded sparse strategy. Context and
 full-file renderers produce raw patch bytes requiring separate terminal escaping.
+
+v0.1.0 is the first release without an alpha suffix. The supported v0.1.x API
+has a [patch-release compatibility policy](docs/RELEASE.md). It remains pre-1.0;
+platform qualification is limited to the pinned compiler on Linux x86-64/glibc.
 
 ## Quickstart
 
@@ -12,12 +16,12 @@ Install Git, Make, CMake 3.27+, Python 3.11+ and a
 C/C++20 toolchain, then:
 
 ```sh
-git clone https://github.com/carabistouflette/goose-diff.git
+git clone --branch v0.1.0 https://github.com/carabistouflette/goose-diff.git
 cd goose-diff
 make setup
 .toolchain/goose/build/goose run examples/compare.goose
 .toolchain/goose/build/goose run examples/sparse.goose
-make check test test-debug test-gcc test-clang test-patch sanitize
+make check test test-debug test-gcc test-clang test-patch test-consumer sanitize
 ```
 
 Setup fetches the full compiler revision in GOOSE_REVISION. With a compatible
@@ -36,7 +40,7 @@ fn main() {
 ```
 
 The import assumes a neighboring local checkout. For a published version use
-`import diff from "carabistouflette/goose-diff@v0.1.0-alpha.3";` instead.
+`import diff from "carabistouflette/goose-diff@v0.1.0";` instead.
 `goose-check` adoption is validated separately with an immutable vendored source
 pin. The library performs no filesystem, process or terminal I/O.
 
