@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.0-alpha.3
+
+- Add explicit sparse comparison with a separate trace-state Limits type.
+- Add transactional sparse context output with documented deterministic ties.
+- Preserve LCS defaults, budget meanings and legacy output; no automatic selection.
+
 ## v0.1.0-alpha.2
 
 - Add configurable bounded context hunks; preserve the legacy full-file renderer.

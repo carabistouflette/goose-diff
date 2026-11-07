@@ -98,3 +98,12 @@ Context does not reduce LCS matrix/comparison work or permit larger inputs.
 All rendered hunks share one output_limit; failures clear the entire output,
 including any earlier complete hunks. Inputs remain raw and require separate
 escaping before terminal display. Identical inputs produce no rows or output.
+
+## Explicit sparse comparison
+
+The APIs and max_cells contract above remain the LCS default. `import diff.sparse;`
+adds `sparse::Limits` and `sparse::compare`; the context module also supplies
+`patch::unified_sparse_context`. Sparse has a separately named max_states bound,
+its own deterministic tie semantics and no automatic fallback. See the complete
+[sparse strategy contract](SPARSE.md) before selecting it. It can improve sparse
+cases while losing on dense cases; it does not promise LCS-identical edit order.

@@ -27,3 +27,10 @@ Context rendering adds exact coordinate, merged/separate hunk, binary/newline,
 invalid-option and all-hunk rollback tests. The independent GNU patch oracle
 uses --fuzz=0 and checks 5,325 legacy/context round trips. Retained representative
 call timings and the algorithm decision are in [context evidence](CONTEXT_RESULTS.md).
+
+Sparse qualification adds independent exponential/LCS minimality oracles, seeded
+comparisons, exact trace/work bounds, invalid/empty inputs and zero-byte-cost
+hostile rewrites. Sparse context shares the independent GNU patch oracle, now
+9,585 LCS/sparse cases. Existing LCS and context goldens remain unchanged. The
+retained experimental branch b6253d0 provides earlier performance evidence; its
+results are historical and not a universal speed or memory claim.

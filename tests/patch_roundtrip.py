@@ -38,11 +38,13 @@ contexts = (None, 0, 1, 3, 16384)
 count = 0
 with tempfile.TemporaryDirectory(prefix="goose-diff-patch-") as directory:
     target = Path(directory) / "input"
-    for context in contexts:
+    for backend, context in [("lcs", c) for c in contexts] + [("sparse", c) for c in contexts if c is not None]:
         for old, new in cases:
             command = [binary, old, new]
             if context is not None:
                 command.append(str(context))
+            if backend == "sparse":
+                command.append("sparse")
             result = subprocess.run(command, check=True, stdout=subprocess.PIPE, timeout=10)
             if old == new:
                 assert result.stdout == b"", context
@@ -55,4 +57,4 @@ with tempfile.TemporaryDirectory(prefix="goose-diff-patch-") as directory:
             assert applied.returncode == 0, (context, old, new, result.stdout, applied.stdout, applied.stderr)
             assert (target.read_bytes() if target.exists() else b"") == new.encode(), (context, old, new)
             count += 1
-print(f"GNU patch independent full/context round trips passed: {count}")
+print(f"GNU patch independent LCS/sparse full/context round trips passed: {count}")
