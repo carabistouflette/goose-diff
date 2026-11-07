@@ -6,6 +6,7 @@ setup:
 format:
 	"$(GOOSE)" format $(SOURCES)
 check:
+	python3 -m unittest discover -s tests -p 'test_*.py'
 	"$(GOOSE)" format --check $(SOURCES)
 	"$(GOOSE)" check tests/core.goose
 	"$(GOOSE)" check tests/unified.goose
