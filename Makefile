@@ -1,5 +1,5 @@
 GOOSE ?= .toolchain/goose/build/goose
-SOURCES = diff.goose unified.goose tests examples bench
+SOURCES = diff.goose unified.goose tests examples bench experiments
 .PHONY: setup format check test test-debug test-gcc test-clang sanitize bench
 setup:
 	./scripts/setup-goose.sh
@@ -9,6 +9,8 @@ check:
 	python3 -m unittest discover -s tests -p 'test_*.py'
 	"$(GOOSE)" format --check $(SOURCES)
 	"$(GOOSE)" check tests/core.goose
+	"$(GOOSE)" check tests/myers.goose
+	"$(GOOSE)" check experiments/measure.goose
 	"$(GOOSE)" check tests/unified.goose
 	"$(GOOSE)" check tests/context.goose
 	"$(GOOSE)" check examples/compare.goose
@@ -17,17 +19,21 @@ check:
 	"$(GOOSE)" check tests/patch_cli.goose
 test:
 	"$(GOOSE)" run tests/core.goose
+	"$(GOOSE)" run tests/myers.goose
 	"$(GOOSE)" run tests/unified.goose
 	"$(GOOSE)" run tests/context.goose
 	"$(GOOSE)" run examples/compare.goose
 test-debug:
 	"$(GOOSE)" run tests/core.goose --debug
+	"$(GOOSE)" run tests/myers.goose --debug
 	"$(GOOSE)" run tests/unified.goose --debug
 	"$(GOOSE)" run tests/context.goose --debug
 test-gcc test-clang:
 	mkdir -p .build
 	"$(GOOSE)" build tests/core.goose --cc $(patsubst test-%,%,$@) --debug -o .build/core-$@
 	.build/core-$@
+	"$(GOOSE)" build tests/myers.goose --cc $(patsubst test-%,%,$@) --debug -o .build/myers-$@
+	.build/myers-$@
 	"$(GOOSE)" build tests/unified.goose --cc $(patsubst test-%,%,$@) --debug -o .build/unified-$@
 	.build/unified-$@
 	"$(GOOSE)" build tests/context.goose --cc $(patsubst test-%,%,$@) --debug -o .build/context-$@
@@ -36,6 +42,8 @@ sanitize:
 	mkdir -p .build
 	"$(GOOSE)" build tests/core.goose --cc ./scripts/sanitizer-cc.sh --debug -o .build/core-sanitize
 	ASAN_OPTIONS=detect_leaks=1 UBSAN_OPTIONS=halt_on_error=1 .build/core-sanitize
+	"$(GOOSE)" build tests/myers.goose --cc ./scripts/sanitizer-cc.sh --debug -o .build/myers-sanitize
+	ASAN_OPTIONS=detect_leaks=1 UBSAN_OPTIONS=halt_on_error=1 .build/myers-sanitize
 	"$(GOOSE)" build tests/unified.goose --cc ./scripts/sanitizer-cc.sh --debug -o .build/unified-sanitize
 	ASAN_OPTIONS=detect_leaks=1 UBSAN_OPTIONS=halt_on_error=1 .build/unified-sanitize
 	"$(GOOSE)" build tests/context.goose --cc ./scripts/sanitizer-cc.sh --debug -o .build/context-sanitize
@@ -55,3 +63,12 @@ test-patch:
 bench-context-build:
 	mkdir -p .build
 	"$(GOOSE)" build bench/context.goose --cc gcc -O2 -o .build/context-bench
+
+.PHONY: experiment-build
+experiment-build:
+	mkdir -p .build
+	"$(GOOSE)" build experiments/measure.goose --cc gcc -O2 -o .build/myers-measure
+
+.PHONY: experiment-verify
+experiment-verify: experiment-build
+	python3 experiments/verify.py --binary .build/myers-measure --out .build/myers-qualification.json

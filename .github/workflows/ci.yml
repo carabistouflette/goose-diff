@@ -11,4 +11,4 @@ jobs:
         with:
           persist-credentials: false
       - run: make setup
-      - run: make check test test-debug test-gcc test-clang test-patch sanitize bench
+      - run: make check test test-debug test-gcc test-clang test-patch sanitize bench experiment-verify
