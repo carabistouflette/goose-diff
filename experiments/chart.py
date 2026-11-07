@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Build a self-contained chart from retained summaries; no remote assets."""
+import json
+from pathlib import Path
+root = Path(__file__).resolve().parent
+rows = json.loads((root / 'results/summary.json').read_text())
+provenance = json.loads((root / 'results/provenance.json').read_text())
+html = '''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+:root{font-family:var(--font-sans,system-ui);color:var(--foreground,CanvasText)}
+body{margin:0}.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:13px}select{font:inherit;color:inherit;border:1px solid var(--border,GrayText);border-radius:var(--radius,6px);padding:6px}.legend{display:flex;gap:20px;font-size:13px;margin:16px 0 0}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}.note{font-size:12px;line-height:1.45;color:var(--muted-foreground,CanvasText)}.mono{font-family:var(--font-mono,monospace);font-size:11px;overflow-wrap:anywhere}svg{width:100%;height:560px;display:block}svg text{fill:var(--foreground,CanvasText);font-size:12px}svg .grid{stroke:var(--border,GrayText);stroke-dasharray:2 4}svg .limited{fill:var(--muted-foreground,GrayText);font-size:11px}summary{cursor:pointer;font-size:13px}table{font-size:11px;border-collapse:collapse;width:100%}td,th{padding:6px;text-align:left;border-bottom:1px solid var(--border,GrayText)}
+</style></head><body>
+<div class="controls"><label>Profile <select id="profile"><option value="wide">Wide — successful matched controls</option><option value="consumer">Consumer — current input/work bounds</option></select></label><label>Metric <select id="metric"><option value="ms">Time per call</option><option value="rss">Process peak RSS</option></select></label></div>
+<div class="legend"><span><i style="background:var(--chart-1,LinkText)"></i>LCS</span><span><i style="background:var(--chart-2,Highlight)"></i>Experimental Myers</span></div>
+<svg id="chart" viewBox="0 0 704 560" role="img" aria-label="Matched profile comparison with median and minimum maximum ranges"></svg>
+<p class="note" id="scope"></p><p class="note">Dots: median of five rounds; whiskers: full range. Each time point is a 20-call round average, excluding file reads and independent reconstruction checks. RSS includes runtime and preflight; it is not heap accounting. Limit failures are labeled and excluded from successful-throughput plots. Every raw sample, including slower results, is retained.</p>
+<details><summary>Exact values for selected profile</summary><table><thead><tr><th>Fixture</th><th>Backend</th><th>Result</th><th>ms/call median [range]</th><th>RSS MiB median [range]</th></tr></thead><tbody id="values"></tbody></table></details>
+<p class="note mono">Measured source: SOURCE<br>Compiler: COMPILER</p>
+<script>const data=DATA;
+const labels={generated_two_far:'Generated: 2 far edits',generated_three_far:'Generated: 3 far edits',compiler_two_far:'Compiler transcript',repeated_two_far:'Repeated: 2 far edits',equal:'Equal',single_middle:'Single middle edit',dense_rewrite:'Dense rewrite',dense_different_lengths:'Dense: unequal lengths'};
+const names=Object.keys(labels),ns='http://www.w3.org/2000/svg';
+function node(type,attrs,text){const n=document.createElementNS(ns,type);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n}
+function draw(){const profile=document.querySelector('#profile').value,metric=document.querySelector('#metric').value,svg=document.querySelector('#chart');svg.replaceChildren();const rows=data.filter(r=>r.profile===profile),good=rows.filter(r=>r.error==='Error.None');const minimum=Math.min(...good.map(r=>r[metric].min)),maximum=Math.max(...good.map(r=>r[metric].max));let low,high,ticks;if(metric==='ms'){low=Math.pow(10,Math.floor(Math.log10(Math.max(minimum,0.000001))));high=Math.pow(10,Math.ceil(Math.log10(maximum)));if(low===high)high=low*10;ticks=[];for(let x=low;x<=high*1.001;x*=10)ticks.push(x)}else{low=0;high=Math.ceil(maximum/2)*2||2;ticks=Array.from({length:6},(_,i)=>i*high/5)}const scale=x=>230+440*(metric==='ms'?(Math.log10(x)-Math.log10(low))/(Math.log10(high)-Math.log10(low)):(x-low)/(high-low));
+for(const tick of ticks){const x=scale(tick);svg.append(node('line',{x1:x,x2:x,y1:8,y2:478,class:'grid'}));svg.append(node('text',{x,y:501,'text-anchor':'middle'},Number(tick.toPrecision(3))))}
+for(let i=0;i<names.length;i++){const y=27+i*57;svg.append(node('text',{x:2,y:y+4},labels[names[i]]));for(let j=0;j<2;j++){const backend=j?'myers':'lcs',r=rows.find(r=>r.workload===names[i]&&r.backend===backend),dy=y+(j?9:-9),color=j?'var(--chart-2,Highlight)':'var(--chart-1,LinkText)';if(r.error!=='Error.None'){svg.append(node('text',{x:234,y:dy+4,class:'limited'},backend+': limit exceeded'));continue}const a=r[metric];svg.append(node('line',{x1:scale(a.min),x2:scale(a.max),y1:dy,y2:dy,stroke:color,'stroke-width':2}));for(const v of [a.min,a.max])svg.append(node('line',{x1:scale(v),x2:scale(v),y1:dy-4,y2:dy+4,stroke:color}));const dot=node('circle',{cx:scale(a.median),cy:dy,r:4,fill:color});dot.append(node('title',{},`${labels[names[i]]}, ${backend}: ${a.median.toFixed(4)} [${a.min.toFixed(4)}, ${a.max.toFixed(4)}]`));svg.append(dot)}}
+svg.append(node('text',{x:450,y:538,'text-anchor':'middle'},metric==='ms'?'Round-average ms per call (log scale)':'Process peak RSS (MiB)'));
+document.querySelector('#scope').textContent=profile==='wide'?'Wide profile: both backends get 4,194,304 logical int64 storage slots and 67,108,864 compared-byte pairs. LCS cells and Myers states remain different API counters.':'Consumer profile: 65,536 input bytes and 4,096 lines each; 262,144 LCS cells or separately named Myers states; 1,048,576 compared-byte pairs. Sparse success versus LCS rejection is a capability result.';
+const body=document.querySelector('#values');body.replaceChildren();for(const r of rows){const tr=document.createElement('tr');for(const value of [labels[r.workload],r.backend,r.error.replace('Error.',''),`${r.ms.median.toFixed(4)} [${r.ms.min.toFixed(4)}, ${r.ms.max.toFixed(4)}]`,`${r.rss.median.toFixed(2)} [${r.rss.min.toFixed(2)}, ${r.rss.max.toFixed(2)}]`]){const td=document.createElement('td');td.textContent=value;tr.append(td)}body.append(tr)}}
+document.querySelector('#profile').addEventListener('change',draw);document.querySelector('#metric').addEventListener('change',draw);draw();
+</script></body></html>'''
+html = html.replace('SOURCE', provenance['source']).replace('COMPILER', provenance['compiler_revision']).replace('DATA', json.dumps(rows))
+(root / 'report.html').write_text(html)
+print(root / 'report.html')

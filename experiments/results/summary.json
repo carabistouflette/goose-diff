@@ -1,0 +1,514 @@
+[
+  {
+    "workload": "generated_two_far",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 0.040887099999999996,
+      "min": 0.03900915,
+      "max": 0.0423948
+    },
+    "rss": {
+      "median": 2.44140625,
+      "min": 2.421875,
+      "max": 2.47265625
+    }
+  },
+  {
+    "workload": "generated_two_far",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07651095,
+      "min": 0.06652105,
+      "max": 0.0823039
+    },
+    "rss": {
+      "median": 2.44140625,
+      "min": 2.42578125,
+      "max": 2.515625
+    }
+  },
+  {
+    "workload": "generated_two_far",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 16.3476411,
+      "min": 16.15390995,
+      "max": 17.08601405
+    },
+    "rss": {
+      "median": 10.71875,
+      "min": 10.671875,
+      "max": 11.5234375
+    }
+  },
+  {
+    "workload": "generated_two_far",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.08635585000000001,
+      "min": 0.068165,
+      "max": 0.09255745
+    },
+    "rss": {
+      "median": 2.4453125,
+      "min": 2.42578125,
+      "max": 2.46484375
+    }
+  },
+  {
+    "workload": "generated_three_far",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 0.0410339,
+      "min": 0.038489,
+      "max": 0.044254949999999994
+    },
+    "rss": {
+      "median": 2.44140625,
+      "min": 2.4375,
+      "max": 2.47265625
+    }
+  },
+  {
+    "workload": "generated_three_far",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07186185,
+      "min": 0.06942015,
+      "max": 0.07945105000000001
+    },
+    "rss": {
+      "median": 2.4453125,
+      "min": 2.35546875,
+      "max": 2.4921875
+    }
+  },
+  {
+    "workload": "generated_three_far",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 16.24296535,
+      "min": 15.676575849999999,
+      "max": 16.6904743
+    },
+    "rss": {
+      "median": 11.42578125,
+      "min": 10.7109375,
+      "max": 11.5234375
+    }
+  },
+  {
+    "workload": "generated_three_far",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.09388205000000001,
+      "min": 0.0875,
+      "max": 0.0978388
+    },
+    "rss": {
+      "median": 2.5078125,
+      "min": 2.4375,
+      "max": 2.57421875
+    }
+  },
+  {
+    "workload": "compiler_two_far",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 0.057195449999999995,
+      "min": 0.055589099999999995,
+      "max": 0.0632791
+    },
+    "rss": {
+      "median": 2.44140625,
+      "min": 2.421875,
+      "max": 2.48046875
+    }
+  },
+  {
+    "workload": "compiler_two_far",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.11031930000000001,
+      "min": 0.10854214999999999,
+      "max": 0.11821375
+    },
+    "rss": {
+      "median": 2.46484375,
+      "min": 2.4296875,
+      "max": 2.4765625
+    }
+  },
+  {
+    "workload": "compiler_two_far",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 11.3640795,
+      "min": 11.29380825,
+      "max": 11.8936522
+    },
+    "rss": {
+      "median": 6.48046875,
+      "min": 6.46484375,
+      "max": 6.51953125
+    }
+  },
+  {
+    "workload": "compiler_two_far",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.12504725,
+      "min": 0.11553085,
+      "max": 0.13449629999999999
+    },
+    "rss": {
+      "median": 2.46484375,
+      "min": 2.35546875,
+      "max": 2.515625
+    }
+  },
+  {
+    "workload": "repeated_two_far",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 0.008491950000000002,
+      "min": 0.008448549999999999,
+      "max": 0.00951405
+    },
+    "rss": {
+      "median": 2.34765625,
+      "min": 2.234375,
+      "max": 2.39453125
+    }
+  },
+  {
+    "workload": "repeated_two_far",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.03100655,
+      "min": 0.03040275,
+      "max": 0.034289400000000005
+    },
+    "rss": {
+      "median": 2.33984375,
+      "min": 2.3203125,
+      "max": 2.390625
+    }
+  },
+  {
+    "workload": "repeated_two_far",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 9.918058,
+      "min": 9.583883199999999,
+      "max": 10.685783800000001
+    },
+    "rss": {
+      "median": 10.71484375,
+      "min": 10.59375,
+      "max": 11.39453125
+    }
+  },
+  {
+    "workload": "repeated_two_far",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.03373825,
+      "min": 0.023199900000000002,
+      "max": 0.0360499
+    },
+    "rss": {
+      "median": 2.3359375,
+      "min": 2.296875,
+      "max": 2.39453125
+    }
+  },
+  {
+    "workload": "equal",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07804515,
+      "min": 0.07674905,
+      "max": 0.0928088
+    },
+    "rss": {
+      "median": 2.45703125,
+      "min": 2.42578125,
+      "max": 2.48046875
+    }
+  },
+  {
+    "workload": "equal",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07854865,
+      "min": 0.0746269,
+      "max": 0.08644795
+    },
+    "rss": {
+      "median": 2.46875,
+      "min": 2.359375,
+      "max": 2.515625
+    }
+  },
+  {
+    "workload": "equal",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07279225,
+      "min": 0.07176095,
+      "max": 0.07706189999999999
+    },
+    "rss": {
+      "median": 2.46875,
+      "min": 2.43359375,
+      "max": 2.55859375
+    }
+  },
+  {
+    "workload": "equal",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07508225,
+      "min": 0.0713787,
+      "max": 0.07641345
+    },
+    "rss": {
+      "median": 2.46875,
+      "min": 2.4609375,
+      "max": 2.515625
+    }
+  },
+  {
+    "workload": "single_middle",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.0775997,
+      "min": 0.0579581,
+      "max": 0.0792378
+    },
+    "rss": {
+      "median": 2.46875,
+      "min": 2.42578125,
+      "max": 2.5546875
+    }
+  },
+  {
+    "workload": "single_middle",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.07770664999999999,
+      "min": 0.0720292,
+      "max": 0.0883748
+    },
+    "rss": {
+      "median": 2.4296875,
+      "min": 2.42578125,
+      "max": 2.4609375
+    }
+  },
+  {
+    "workload": "single_middle",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.0768258,
+      "min": 0.057426,
+      "max": 0.07955145
+    },
+    "rss": {
+      "median": 2.46484375,
+      "min": 2.359375,
+      "max": 2.49609375
+    }
+  },
+  {
+    "workload": "single_middle",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 0.0764337,
+      "min": 0.0643553,
+      "max": 0.07771660000000001
+    },
+    "rss": {
+      "median": 2.46875,
+      "min": 2.42578125,
+      "max": 2.51953125
+    }
+  },
+  {
+    "workload": "dense_rewrite",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 0.0029007,
+      "min": 0.0028125,
+      "max": 0.00368275
+    },
+    "rss": {
+      "median": 2.390625,
+      "min": 2.30078125,
+      "max": 2.390625
+    }
+  },
+  {
+    "workload": "dense_rewrite",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 3.9510602,
+      "min": 3.71932105,
+      "max": 3.9967154
+    },
+    "rss": {
+      "median": 4.34765625,
+      "min": 4.30859375,
+      "max": 4.39453125
+    }
+  },
+  {
+    "workload": "dense_rewrite",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 4.303622900000001,
+      "min": 3.0187633,
+      "max": 4.47233285
+    },
+    "rss": {
+      "median": 5.09765625,
+      "min": 5.046875,
+      "max": 5.14453125
+    }
+  },
+  {
+    "workload": "dense_rewrite",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 6.7715399000000005,
+      "min": 6.7401187,
+      "max": 6.9257502
+    },
+    "rss": {
+      "median": 9.35546875,
+      "min": 9.34375,
+      "max": 9.37890625
+    }
+  },
+  {
+    "workload": "dense_different_lengths",
+    "profile": "consumer",
+    "backend": "lcs",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 0.0040527,
+      "min": 0.0037138,
+      "max": 0.0045586
+    },
+    "rss": {
+      "median": 2.3515625,
+      "min": 2.3125,
+      "max": 2.44921875
+    }
+  },
+  {
+    "workload": "dense_different_lengths",
+    "profile": "consumer",
+    "backend": "myers",
+    "error": "Error.LimitExceeded",
+    "ms": {
+      "median": 3.6224382999999998,
+      "min": 3.531734,
+      "max": 3.9957775
+    },
+    "rss": {
+      "median": 4.3359375,
+      "min": 4.30078125,
+      "max": 4.390625
+    }
+  },
+  {
+    "workload": "dense_different_lengths",
+    "profile": "wide",
+    "backend": "lcs",
+    "error": "Error.None",
+    "ms": {
+      "median": 3.9436618500000002,
+      "min": 3.81584765,
+      "max": 4.1173005
+    },
+    "rss": {
+      "median": 7.33203125,
+      "min": 6.09375,
+      "max": 7.3984375
+    }
+  },
+  {
+    "workload": "dense_different_lengths",
+    "profile": "wide",
+    "backend": "myers",
+    "error": "Error.None",
+    "ms": {
+      "median": 8.2060507,
+      "min": 7.6619385,
+      "max": 8.3253362
+    },
+    "rss": {
+      "median": 9.84765625,
+      "min": 9.640625,
+      "max": 11.390625
+    }
+  }
+]
