@@ -22,3 +22,8 @@ an exact-source standalone clone, obtain independent review, and document
 source/toolchain identities. No public release or consumer migration is implied.
 
 [Retained local results](RESULTS.md) record tested source and limitations.
+
+Context rendering adds exact coordinate, merged/separate hunk, binary/newline,
+invalid-option and all-hunk rollback tests. The independent GNU patch oracle
+uses --fuzz=0 and checks 5,325 legacy/context round trips. Retained representative
+call timings and the algorithm decision are in [context evidence](CONTEXT_RESULTS.md).

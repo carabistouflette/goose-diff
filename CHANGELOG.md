@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.0-alpha.2
 
 - Add configurable bounded context hunks; preserve the legacy full-file renderer.
 - Check exact hunk coordinates and independent no-fuzz patch application.
