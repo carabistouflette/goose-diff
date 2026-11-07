@@ -5,7 +5,7 @@ Use focused branches and Conventional Commits (`feat:`, `fix:`, `test:`, `docs:`
 compiler caches, binaries, credentials or private coordination notes.
 
 Use the exact compiler in GOOSE_REVISION. Run `make setup`, `make format`, then
-`make check test test-debug test-gcc test-clang sanitize`. Behavior changes need
+`make check test test-debug test-gcc test-clang test-patch sanitize`. Behavior changes need
 independent review and positive, failure and boundary tests. Preserve empty
 output on errors and all documented byte, line, memory and work limits.
 
